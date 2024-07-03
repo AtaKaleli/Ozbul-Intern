@@ -1,21 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace WebApplication1.Models
+﻿namespace WebApplication1.Models
 {
     public class Theatre
     {
-        public int ID { get; set; }
-        [Required]
-        
-        public Movie Movie { get; set; }
-        [Required]
 
-        public Movie[] Movies { get; set; }
-        
-        [Required]
-        
-        public string Location { get; set; }
-        [Required]
+        //will be replaced later on as we still not learned relations
+        public List<Movie> Movies { get; set; }
+
+
+
+        public string Address { get; set; }
+
 
         public string Name { get; set; }
     }
