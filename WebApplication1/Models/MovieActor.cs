@@ -4,7 +4,7 @@
     {
         public virtual int MovieId { get; set; }
         public virtual int ActorId { get; set; }
-        public virtual Movie Movie { get; set; }
-        public Worker Actor { get; set; }
+        public  Movie Movie { get; set; }
+        public  Worker Actor { get; set; }
     }
 }
