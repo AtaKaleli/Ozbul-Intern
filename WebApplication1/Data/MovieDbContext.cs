@@ -10,9 +10,6 @@ namespace WebApplication1.Data
 
         }
 
-        //just for now, I will remain them like this. When we will learn relations, I will seperate them.
-        public DbSet<Movie> Movies { get; set; }
-        public DbSet<Theatre> Theatres { get; set; }
-        public DbSet<Worker> Workers { get; set; }
+        
     }
 }

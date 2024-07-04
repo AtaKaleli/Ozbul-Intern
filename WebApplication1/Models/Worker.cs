@@ -10,6 +10,9 @@ namespace WebApplication1.Models
         
         public string LastName { get; set; }
         public Role Role { get; set; }
+        public ICollection<Movie> Movies { get; set; }
+        public ICollection<MovieActor> MovieActors { get; set; }
+
 
     }
 

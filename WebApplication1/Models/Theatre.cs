@@ -3,14 +3,9 @@
     public class Theatre
     {
 
-        //will be replaced later on as we still not learned relations
-        public List<Movie> Movies { get; set; }
-
-
-
+        public int Id { get; set; }
         public string Address { get; set; }
-
-
         public string Name { get; set; }
+        public ICollection<MovieTheatre> MovieTheatres { get; set; }
     }
 }
