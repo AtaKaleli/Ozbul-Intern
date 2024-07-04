@@ -1,10 +1,12 @@
-﻿namespace WebApplication1.Models
+﻿using Microsoft.AspNetCore.Components.Web.Virtualization;
+
+namespace WebApplication1.Models
 {
     public class MovieTheatre
     {
-        public int MovieId { get; set; }
-        public int TheatreId { get; set; }
-        public Movie Movie { get; set; }
-        public Theatre Theatre { get; set; }
+        public virtual int MovieId { get; set; }
+        public virtual int TheatreId { get; set; }
+        public virtual Movie Movie { get; set; }
+        public virtual Theatre Theatre { get; set; }
     }
 }
