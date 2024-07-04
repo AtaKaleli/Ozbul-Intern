@@ -2,9 +2,9 @@
 {
     public class MovieActor
     {
-        public int MovieId { get; set; }
-        public int ActorId { get; set; }
-        public Movie Movie { get; set; }
+        public virtual int MovieId { get; set; }
+        public virtual int ActorId { get; set; }
+        public virtual Movie Movie { get; set; }
         public Worker Actor { get; set; }
     }
 }

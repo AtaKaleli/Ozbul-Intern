@@ -28,7 +28,6 @@ namespace WebApplication1.Data
                 .HasOne(m => m.Actor)
                 .WithMany(ma => ma.MovieActors)
                 .HasForeignKey(m => m.ActorId);
-
             modelBuilder.Entity<MovieTheatre>()
                 .HasKey(mt => new { mt.MovieId, mt.TheatreId });
             modelBuilder.Entity<MovieTheatre>()
@@ -39,11 +38,10 @@ namespace WebApplication1.Data
                 .HasOne(m => m.Theatre)
                 .WithMany(mt => mt.MovieTheatres)
                 .HasForeignKey(m => m.TheatreId);
-
-
-
+            modelBuilder.Entity<Movie>()
+                .HasOne(m => m.Director)
+                .WithMany(d => d.Movies)
+                .HasForeignKey(m => m.DirectorId);
         }
-
-
     }
 }
