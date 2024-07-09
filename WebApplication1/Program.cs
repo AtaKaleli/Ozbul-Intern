@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 using WebApplication1.Data;
 using WebApplication1.Interfaces;
 using WebApplication1.Repositories;
@@ -11,6 +12,8 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<IMovieRepository, MovieRepository>();
 builder.Services.AddScoped<ITheatreRepository, TheatreRepository>();
 builder.Services.AddScoped<IWorkerRepository, WorkerRepository>();
+builder.Services.AddControllers().AddJsonOptions(x =>
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
