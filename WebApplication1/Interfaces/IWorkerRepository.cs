@@ -5,6 +5,6 @@ namespace WebApplication1.Interfaces
 {
     public interface IWorkerRepository
     {
-        ICollection<Worker> GetWorkers();
+        List<Worker> GetWorkers();
     }
 }

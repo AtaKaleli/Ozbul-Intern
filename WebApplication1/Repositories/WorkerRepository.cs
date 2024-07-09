@@ -1,7 +1,6 @@
 ﻿using WebApplication1.Data;
 using WebApplication1.Interfaces;
 using WebApplication1.Models;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace WebApplication1.Repositories
@@ -15,7 +14,7 @@ namespace WebApplication1.Repositories
             _context = context;
         }
 
-        public ICollection<Worker> GetWorkers()
+        public List<Worker> GetWorkers()
         {
             return _context.Workers.OrderBy(w => w.Id).ToList();
         }

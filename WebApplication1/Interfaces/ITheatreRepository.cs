@@ -5,6 +5,6 @@ namespace WebApplication1.Interfaces
 {
     public interface ITheatreRepository
     {
-        ICollection<Theatre> GetTheatres();
+        List<Theatre> GetTheatres();
     }
 }
