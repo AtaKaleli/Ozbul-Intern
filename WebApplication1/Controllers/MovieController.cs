@@ -26,5 +26,21 @@ namespace WebApplication1.Controllers
 
             return Ok(movies);
         }
+
+        [HttpGet("{id}")]
+        [ProducesResponseType(200, Type = typeof(Movie))]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public IActionResult GetMovieById(int id)
+        {
+            var movie = _movieRepository.GetMovieById(id);
+            if (movie == null)
+                return NotFound();
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            return Ok(movie);
+        }
     }
 }
