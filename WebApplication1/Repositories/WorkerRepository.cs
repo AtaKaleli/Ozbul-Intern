@@ -20,5 +20,10 @@ namespace WebApplication1.Repositories
         {
             return _context.Workers.OrderBy(w => w.Id).ToList();
         }
+        public Worker GetWorkerById(int id)
+        {
+            return _context.Workers
+                .FirstOrDefault(w => w.Id == id); 
+        }
     }
 }

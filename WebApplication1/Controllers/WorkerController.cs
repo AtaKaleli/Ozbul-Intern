@@ -27,5 +27,20 @@ namespace WebApplication1.Controllers
 
             return Ok(workers);
         }
+        [HttpGet("{id}")]
+        [ProducesResponseType(200, Type = typeof(Worker))]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public IActionResult GetWorkerById(int id)
+        {
+            var worker = _workerRepository.GetWorkerById(id);
+            if (worker == null)
+                return NotFound();
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            return Ok(worker);
+        }
     }
 }
