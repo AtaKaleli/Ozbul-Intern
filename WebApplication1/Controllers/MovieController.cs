@@ -17,7 +17,6 @@ namespace WebApplication1.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(200, Type = typeof(IEnumerable<Movie>))]
         public IActionResult GetMovies()
         {
             var movies = _movieRepository.GetMovies();
@@ -28,9 +27,6 @@ namespace WebApplication1.Controllers
         }
 
         [HttpGet("{id}")]
-        [ProducesResponseType(200, Type = typeof(Movie))]
-        [ProducesResponseType(400)]
-        [ProducesResponseType(404)]
         public IActionResult GetMovieById(int id)
         {
             var movie = _movieRepository.GetMovieById(id);

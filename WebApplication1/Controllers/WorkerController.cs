@@ -18,7 +18,6 @@ namespace WebApplication1.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(200, Type = typeof(IEnumerable<Worker>))]
         public IActionResult GetWorkers()
         {
             var workers = _workerRepository.GetWorkers();
@@ -27,10 +26,8 @@ namespace WebApplication1.Controllers
 
             return Ok(workers);
         }
+
         [HttpGet("{id}")]
-        [ProducesResponseType(200, Type = typeof(Worker))]
-        [ProducesResponseType(400)]
-        [ProducesResponseType(404)]
         public IActionResult GetWorkerById(int id)
         {
             var worker = _workerRepository.GetWorkerById(id);
