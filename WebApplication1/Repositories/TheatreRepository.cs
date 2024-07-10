@@ -19,5 +19,10 @@ namespace WebApplication1.Repositories
         {
             return _context.Theatres.OrderBy(t => t.Id).ToList();
         }
+        public Theatre GetTheatreById(int id)
+        {
+            return _context.Theatres
+                .FirstOrDefault(t => t.Id == id); 
+        }
     }
 }

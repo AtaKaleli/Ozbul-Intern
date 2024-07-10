@@ -27,5 +27,20 @@ namespace WebApplication1.Controllers
 
             return Ok(theatres);
         }
+        [HttpGet("{id}")]
+        [ProducesResponseType(200, Type = typeof(Theatre))]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public IActionResult GetTheatreById(int id)
+        {
+            var theatre = _theatreRepository.GetTheatreById(id);
+            if (theatre == null)
+                return NotFound();
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            return Ok(theatre);
+        }
     }
 }

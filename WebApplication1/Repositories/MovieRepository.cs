@@ -25,7 +25,7 @@ namespace WebApplication1.Repositories
         {
             return _context.Movies
                 .Include(m => m.Director)
-                .FirstOrDefault(m => m.Id == id); // Fetch movie by ID
+                .FirstOrDefault(m => m.Id == id);
         }
     }
 }
