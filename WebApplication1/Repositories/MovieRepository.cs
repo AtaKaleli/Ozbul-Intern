@@ -27,5 +27,15 @@ namespace WebApplication1.Repositories
                 .Include(m => m.Director)
                 .FirstOrDefault(m => m.Id == id);
         }
+        public bool CreateMovie(Movie movie)
+        {
+            _context.Add(movie);
+            return Save();
+        }
+        public bool Save()
+        {
+            var saved = _context.SaveChanges();
+            return saved > 0;
+        }
     }
 }

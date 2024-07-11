@@ -38,5 +38,15 @@ namespace WebApplication1.Controllers
 
             return Ok(movie);
         }
+
+        [HttpPost]
+        public IActionResult CreateMovie([FromBody] Movie movie)
+        {
+            // the error part can be divided for more clarity later on If asked me to do
+            if (movie == null || !_movieRepository.CreateMovie(movie))
+                return BadRequest(ModelState);
+
+            return CreatedAtAction(nameof(GetMovieById), new { id = movie.Id }, movie);
+        }
     }
 }
