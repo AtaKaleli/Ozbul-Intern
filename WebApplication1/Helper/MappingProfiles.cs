@@ -10,6 +10,8 @@ namespace WebApplication1.Helper
         {
             CreateMap<Movie, MovieDto>()
                 .ForMember(dest => dest.DirectorName, opt => opt.MapFrom(src => src.Director.FirstName + " " + src.Director.LastName));
+
+            CreateMap<CreateMovieDto, Movie>();
         }
     }
 }

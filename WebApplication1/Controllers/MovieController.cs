@@ -44,11 +44,16 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateMovie([FromBody] Movie movie)
+        public IActionResult CreateMovie([FromBody] CreateMovieDto movieDto)
         {
-            // the error part can be divided for more clarity later on If asked me to do
-            if (movie == null || !_movieRepository.CreateMovie(movie))
+            if (movieDto == null)
                 return BadRequest(ModelState);
+
+            var movie = _mapper.Map<Movie>(movieDto);
+
+            if (!_movieRepository.CreateMovie(movie))
+                return StatusCode(500, ModelState);
+            
 
             return CreatedAtAction(nameof(GetMovieById), new { id = movie.Id }, movie);
         }
