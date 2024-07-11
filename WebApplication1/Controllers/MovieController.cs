@@ -2,6 +2,8 @@
 using WebApplication1.Interfaces;
 using WebApplication1.Models;
 using System.Collections.Generic;
+using AutoMapper;
+using WebApplication1.Dto;
 
 namespace WebApplication1.Controllers
 {
@@ -10,16 +12,18 @@ namespace WebApplication1.Controllers
     public class MovieController : ControllerBase
     {
         private readonly IMovieRepository _movieRepository;
+        private readonly IMapper _mapper;
 
-        public MovieController(IMovieRepository movieRepository)
+        public MovieController(IMovieRepository movieRepository, IMapper mapper)
         {
             _movieRepository = movieRepository;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public IActionResult GetMovies()
         {
-            var movies = _movieRepository.GetMovies();
+            var movies = _mapper.Map<List<MovieDto>>(_movieRepository.GetMovies());
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
@@ -29,7 +33,7 @@ namespace WebApplication1.Controllers
         [HttpGet("{id}")]
         public IActionResult GetMovieById(int id)
         {
-            var movie = _movieRepository.GetMovieById(id);
+            var movie = _mapper.Map<MovieDto>(_movieRepository.GetMovieById(id));
             if (movie == null)
                 return NotFound();
 
