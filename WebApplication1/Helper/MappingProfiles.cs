@@ -13,7 +13,9 @@ namespace WebApplication1.Helper
 
             CreateMap<CreateMovieDto, Movie>();
             CreateMap<Worker, WorkerDto>();
+            CreateMap<WorkerDto, Worker>();
             CreateMap<Theatre, TheatreDto>();
+            CreateMap<TheatreDto, Theatre>();
         }
     }
 }

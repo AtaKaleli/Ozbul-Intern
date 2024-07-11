@@ -4,6 +4,7 @@ using WebApplication1.Models;
 using System.Collections.Generic;
 using AutoMapper;
 using WebApplication1.Dto;
+using WebApplication1.Repositories;
 
 namespace WebApplication1.Controllers
 {
@@ -13,11 +14,13 @@ namespace WebApplication1.Controllers
     {
         private readonly IMovieRepository _movieRepository;
         private readonly IMapper _mapper;
+        private readonly IWorkerRepository _workerRepository;
 
-        public MovieController(IMovieRepository movieRepository, IMapper mapper)
+        public MovieController(IMovieRepository movieRepository, IMapper mapper, IWorkerRepository workerRepository)
         {
             _movieRepository = movieRepository;
             _mapper = mapper;
+            _workerRepository = workerRepository;
         }
 
         [HttpGet]
@@ -49,11 +52,20 @@ namespace WebApplication1.Controllers
             if (movieDto == null)
                 return BadRequest(ModelState);
 
+            var director = _workerRepository.GetWorkerById(movieDto.DirectorId);
+            if (director == null || director.Role != Role.Director)
+            {
+                ModelState.AddModelError("DirectorId", "The specified DirectorId is invalid or the worker is not a director.");
+                return BadRequest(ModelState);
+            }
+
             var movie = _mapper.Map<Movie>(movieDto);
 
             if (!_movieRepository.CreateMovie(movie))
+            {
+                ModelState.AddModelError("", "Something went wrong while saving the movie.");
                 return StatusCode(500, ModelState);
-            
+            }
 
             return CreatedAtAction(nameof(GetMovieById), new { id = movie.Id }, movie);
         }

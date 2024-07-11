@@ -4,6 +4,7 @@ using WebApplication1.Models;
 using System.Collections.Generic;
 using WebApplication1.Dto;
 using AutoMapper;
+using WebApplication1.Repositories;
 
 namespace WebApplication1.Controllers
 {
@@ -31,6 +32,19 @@ namespace WebApplication1.Controllers
         }
 
         [HttpGet("{id}")]
+        public IActionResult GetTheatreById(int id)
+        {
+            var movie = _mapper.Map<MovieDto>(_theatreRepository.GetTheatreById(id));
+            if (movie == null)
+                return NotFound();
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            return Ok(movie);
+        }
+
+        [HttpPost]
         public IActionResult CreateTheatre([FromBody] TheatreDto theatreDto)
         {
             if (theatreDto == null)
@@ -43,7 +57,6 @@ namespace WebApplication1.Controllers
                 ModelState.AddModelError("", "Something went wrong while saving the theatre.");
                 return StatusCode(500, ModelState);
             }
-
             return CreatedAtAction("GetTheatreById", new { id = theatre.Id }, theatre);
         }
     }
