@@ -1,8 +1,9 @@
-﻿
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using WebApplication1.Interfaces;
 using WebApplication1.Models;
 using System.Collections.Generic;
+using WebApplication1.Dto;
 
 namespace WebApplication1.Controllers
 {
@@ -11,10 +12,12 @@ namespace WebApplication1.Controllers
     public class WorkerController : ControllerBase
     {
         private readonly IWorkerRepository _workerRepository;
+        private readonly IMapper _mapper;
 
-        public WorkerController(IWorkerRepository workerRepository)
+        public WorkerController(IWorkerRepository workerRepository, IMapper mapper)
         {
             _workerRepository = workerRepository;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -38,6 +41,23 @@ namespace WebApplication1.Controllers
                 return BadRequest(ModelState);
 
             return Ok(worker);
+        }
+
+        [HttpPost]
+        public IActionResult CreateWorker([FromBody] WorkerDto workerDto)
+        {
+            if (workerDto == null)
+                return BadRequest(ModelState);
+
+            var worker = _mapper.Map<Worker>(workerDto);
+
+            if (!_workerRepository.CreateWorker(worker))
+            {
+                ModelState.AddModelError("", "Something went wrong while saving the worker.");
+                return StatusCode(500, ModelState);
+            }
+
+            return CreatedAtAction("GetWorkerById", new { id = worker.Id }, worker);
         }
     }
 }

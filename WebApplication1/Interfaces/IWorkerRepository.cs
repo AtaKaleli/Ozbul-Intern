@@ -7,5 +7,8 @@ namespace WebApplication1.Interfaces
     {
         List<Worker> GetWorkers();
         Worker GetWorkerById(int id);
+        bool CreateWorker(Worker worker);
+        bool Save();
+
     }
 }

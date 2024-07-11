@@ -12,6 +12,8 @@ namespace WebApplication1.Helper
                 .ForMember(dest => dest.DirectorName, opt => opt.MapFrom(src => src.Director.FirstName + " " + src.Director.LastName));
 
             CreateMap<CreateMovieDto, Movie>();
+            CreateMap<Worker, WorkerDto>();
+            CreateMap<Theatre, TheatreDto>();
         }
     }
 }
