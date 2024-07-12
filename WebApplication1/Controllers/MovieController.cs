@@ -69,5 +69,21 @@ namespace WebApplication1.Controllers
 
             return CreatedAtAction(nameof(GetMovieById), new { id = movie.Id }, movie);
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteMovie(int id)
+        {
+            var movie = _movieRepository.GetMovieById(id);
+            if (movie == null)
+                return NotFound();
+
+            if (!_movieRepository.DeleteMovie(movie))
+            {
+                ModelState.AddModelError("", "Something went wrong while deleting the movie.");
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
+        }
     }
 }
