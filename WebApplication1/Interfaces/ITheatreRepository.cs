@@ -7,5 +7,8 @@ namespace WebApplication1.Interfaces
     {
         List<Theatre> GetTheatres();
         Theatre GetTheatreById(int id);
+        bool CreateTheatre(Theatre theatre);
+        bool Save();
+
     }
 }

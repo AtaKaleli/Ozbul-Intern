@@ -25,5 +25,17 @@ namespace WebApplication1.Repositories
             return _context.Workers
                 .FirstOrDefault(w => w.Id == id); 
         }
+        public bool CreateWorker(Worker worker)
+        {
+            _context.Add(worker);
+            return Save();
+        }
+
+        public bool Save()
+        {
+            var saved = _context.SaveChanges();
+            return saved > 0;
+        }
+
     }
 }
