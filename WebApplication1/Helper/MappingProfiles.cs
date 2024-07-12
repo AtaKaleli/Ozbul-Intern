@@ -10,8 +10,8 @@ namespace WebApplication1.Helper
         {
             CreateMap<Movie, MovieDto>()
                  .ForMember(dest => dest.DirectorName, opt => opt.MapFrom(src => src.Director.FirstName + " " + src.Director.LastName))
-                 .ForMember(dest => dest.MovieActors, opt => opt.MapFrom(src => src.MovieActors.Select(ma => ma.Actor.FirstName + " " + ma.Actor.LastName).ToList()))
-                 .ForMember(dest => dest.MovieTheatres, opt => opt.MapFrom(src => src.MovieTheatres.Select(mt => mt.Theatre.Name).ToList()));
+                 .ForMember(dest => dest.Actors, opt => opt.MapFrom(src => src.MovieActors.Select(ma => ma.Actor.FirstName + " " + ma.Actor.LastName).ToList()))
+                 .ForMember(dest => dest.Theatres, opt => opt.MapFrom(src => src.MovieTheatres.Select(mt => mt.Theatre.Name).ToList()));
 
 
             CreateMap<CreateMovieDto, Movie>();

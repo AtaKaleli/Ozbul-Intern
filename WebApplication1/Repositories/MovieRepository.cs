@@ -18,13 +18,22 @@ namespace WebApplication1.Repositories
         {
             return _context.Movies
                 .Include(m => m.Director)
+                .Include(m => m.MovieActors)
+                    .ThenInclude(ma => ma.Actor)
+                .Include(m => m.MovieTheatres)
+                    .ThenInclude(mt => mt.Theatre)
                 .OrderBy(m => m.Id)
                 .ToList();
         }
+
         public Movie GetMovieById(int id)
         {
             return _context.Movies
                 .Include(m => m.Director)
+                .Include(m => m.MovieActors)
+                    .ThenInclude(ma => ma.Actor)
+                .Include(m => m.MovieTheatres)
+                    .ThenInclude(mt => mt.Theatre)
                 .FirstOrDefault(m => m.Id == id);
         }
         public bool CreateMovie(Movie movie)
