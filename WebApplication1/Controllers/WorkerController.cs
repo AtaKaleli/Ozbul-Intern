@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using WebApplication1.Dto;
 using WebApplication1.Interfaces;
 using WebApplication1.Models;
 using System.Collections.Generic;
-using WebApplication1.Dto;
 
 namespace WebApplication1.Controllers
 {
@@ -23,7 +23,7 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public IActionResult GetWorkers()
         {
-            var workers = _workerRepository.GetWorkers();
+            var workers = _mapper.Map<List<WorkerDto>>(_workerRepository.GetWorkers());
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
@@ -33,7 +33,7 @@ namespace WebApplication1.Controllers
         [HttpGet("{id}")]
         public IActionResult GetWorkerById(int id)
         {
-            var worker = _workerRepository.GetWorkerById(id);
+            var worker = _mapper.Map<WorkerDto>(_workerRepository.GetWorkerById(id));
             if (worker == null)
                 return NotFound();
 
