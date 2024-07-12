@@ -30,6 +30,11 @@ namespace WebApplication1.Repositories
             return Save();
         }
 
+        public bool DeleteTheatre(Theatre theatre)
+        {
+            _context.Remove(theatre);
+            return Save();
+        }
         public bool Save()
         {
             var saved = _context.SaveChanges();
