@@ -48,6 +48,11 @@ namespace WebApplication1.Repositories
             return Save();
         }
 
+        public bool UpdateMovie(Movie movie)
+        {
+            _context.Update(movie);
+            return Save();
+        }
         public bool Save()
         {
             var saved = _context.SaveChanges();

@@ -8,6 +8,8 @@ namespace WebApplication1.Interfaces
         Movie GetMovieById(int id);
         bool CreateMovie(Movie movie);
         bool DeleteMovie(Movie movie);
+        bool UpdateMovie(Movie movie);
+
         bool Save();
 
     }

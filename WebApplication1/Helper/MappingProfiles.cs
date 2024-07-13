@@ -16,6 +16,7 @@ namespace WebApplication1.Helper
                 .ForMember(dest => dest.Theatres, opt => opt.MapFrom(src => src.MovieTheatres.Select(mt => mt.Theatre.Name).ToList()));
 
             CreateMap<CreateMovieDto, Movie>();
+            CreateMap<UpdateMovieDto, Movie>();
 
             CreateMap<Worker, WorkerDto>()
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.FirstName + " " + src.LastName))  // Combine first name and last name
