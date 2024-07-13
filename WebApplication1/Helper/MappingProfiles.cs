@@ -31,6 +31,8 @@ namespace WebApplication1.Helper
 
             CreateMap<Theatre, TheatreDto>();
             CreateMap<TheatreDto, Theatre>();
+
+            CreateMap<UpdateTheatreDto, Theatre>();
         }
 
         private string SplitFirstName(string name)

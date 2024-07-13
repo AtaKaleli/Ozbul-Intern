@@ -75,5 +75,23 @@ namespace WebApplication1.Controllers
 
             return NoContent();
         }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateTheatre(int id, [FromBody] UpdateTheatreDto theatreDto)
+        {
+            var existingTheatre = _theatreRepository.GetTheatreById(id);
+            if (existingTheatre == null)
+                return NotFound();
+
+            var theatreToUpdate = _mapper.Map(theatreDto, existingTheatre);
+
+            if (!_theatreRepository.Save())
+            {
+                ModelState.AddModelError("", "Something went wrong while updating the theatre.");
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
+        }
     }
 }
