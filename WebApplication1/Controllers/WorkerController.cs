@@ -75,5 +75,23 @@ namespace WebApplication1.Controllers
 
             return NoContent();
         }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateWorker(int id, [FromBody] UpdateWorkerDto workerDto)
+        {
+            var existingWorker = _workerRepository.GetWorkerById(id);
+            if (existingWorker == null)
+                return NotFound();
+
+            var workerToUpdate = _mapper.Map(workerDto, existingWorker);
+
+            if (!_workerRepository.UpdateWorker(workerToUpdate))
+            {
+                ModelState.AddModelError("", "Something went wrong while updating the worker.");
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
+        }
     }
 }

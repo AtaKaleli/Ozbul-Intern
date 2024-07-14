@@ -36,6 +36,11 @@ namespace WebApplication1.Repositories
             _context.Remove(worker);
             return Save();
         }
+        public bool UpdateWorker(Worker worker)  
+        {
+            _context.Update(worker);
+            return Save();
+        }
         public bool Save()
         {
             var saved = _context.SaveChanges();
