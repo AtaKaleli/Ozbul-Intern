@@ -33,7 +33,8 @@ namespace WebApplication1.Data
             modelBuilder.Entity<MovieTheatre>()
                 .HasKey(mt => new { mt.MovieId, mt.TheatreId });
             modelBuilder.Entity<MovieTheatre>()
-                .HasOne(mt => mt.Movie)
+                .HasOne(mt => mt.Movie) 
+                
                 .WithMany(m => m.MovieTheatres)
                 .HasForeignKey(mt => mt.MovieId)
                 .OnDelete(DeleteBehavior.Restrict); // Change cascade delete behavior

@@ -59,5 +59,39 @@ namespace WebApplication1.Controllers
             }
             return CreatedAtAction("GetTheatreById", new { id = theatre.Id }, theatre);
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteTheatre(int id)
+        {
+            var theatre = _theatreRepository.GetTheatreById(id);
+            if (theatre == null)
+                return NotFound();
+
+            if (!_theatreRepository.DeleteTheatre(theatre))
+            {
+                ModelState.AddModelError("", "Something went wrong while deleting the theatre.");
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateTheatre(int id, [FromBody] UpdateTheatreDto theatreDto)
+        {
+            var existingTheatre = _theatreRepository.GetTheatreById(id);
+            if (existingTheatre == null)
+                return NotFound();
+
+            var theatreToUpdate = _mapper.Map(theatreDto, existingTheatre);
+
+            if (!_theatreRepository.Save())
+            {
+                ModelState.AddModelError("", "Something went wrong while updating the theatre.");
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
+        }
     }
 }

@@ -7,6 +7,10 @@ namespace WebApplication1.Interfaces
         List<Movie> GetMovies();
         Movie GetMovieById(int id);
         bool CreateMovie(Movie movie);
+        bool DeleteMovie(Movie movie);
+        bool UpdateMovie(Movie movie);
+
         bool Save();
+
     }
 }

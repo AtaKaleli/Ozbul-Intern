@@ -24,9 +24,22 @@ namespace WebApplication1.Repositories
             return _context.Theatres
                 .FirstOrDefault(t => t.Id == id); 
         }
+
         public bool CreateTheatre(Theatre theatre)
         {
             _context.Add(theatre);
+            return Save();
+        }
+
+        public bool DeleteTheatre(Theatre theatre)
+        {
+            _context.Remove(theatre);
+            return Save();
+        }
+
+        public bool UpdateTheatre(Theatre theatre)
+        {
+            _context.Update(theatre);
             return Save();
         }
 

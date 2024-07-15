@@ -59,5 +59,39 @@ namespace WebApplication1.Controllers
 
             return CreatedAtAction("GetWorkerById", new { id = worker.Id }, worker);
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteWorker(int id)
+        {
+            var worker = _workerRepository.GetWorkerById(id);
+            if (worker == null)
+                return NotFound();
+
+            if (!_workerRepository.DeleteWorker(worker))
+            {
+                ModelState.AddModelError("", "Something went wrong while deleting the worker.");
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateWorker(int id, [FromBody] UpdateWorkerDto workerDto)
+        {
+            var existingWorker = _workerRepository.GetWorkerById(id);
+            if (existingWorker == null)
+                return NotFound();
+
+            var workerToUpdate = _mapper.Map(workerDto, existingWorker);
+
+            if (!_workerRepository.UpdateWorker(workerToUpdate))
+            {
+                ModelState.AddModelError("", "Something went wrong while updating the worker.");
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
+        }
     }
 }

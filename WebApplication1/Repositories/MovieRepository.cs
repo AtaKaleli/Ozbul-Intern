@@ -41,6 +41,18 @@ namespace WebApplication1.Repositories
             _context.Add(movie);
             return Save();
         }
+
+        public bool DeleteMovie(Movie movie)
+        {
+            _context.Remove(movie);
+            return Save();
+        }
+
+        public bool UpdateMovie(Movie movie)
+        {
+            _context.Update(movie);
+            return Save();
+        }
         public bool Save()
         {
             var saved = _context.SaveChanges();

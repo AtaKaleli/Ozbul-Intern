@@ -16,6 +16,7 @@ namespace WebApplication1.Helper
                 .ForMember(dest => dest.Theatres, opt => opt.MapFrom(src => src.MovieTheatres.Select(mt => mt.Theatre.Name).ToList()));
 
             CreateMap<CreateMovieDto, Movie>();
+            CreateMap<UpdateMovieDto, Movie>();
 
             CreateMap<Worker, WorkerDto>()
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.FirstName + " " + src.LastName))  // Combine first name and last name
@@ -28,8 +29,14 @@ namespace WebApplication1.Helper
                 .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => SplitLastName(src.Name)))  // Split name back to last name
                 .ForMember(dest => dest.Role, opt => opt.MapFrom(src => Enum.Parse(typeof(Role), src.Role)));  // Map string back to enum
 
+
             CreateMap<Theatre, TheatreDto>();
             CreateMap<TheatreDto, Theatre>();
+
+            CreateMap<UpdateTheatreDto, Theatre>();
+            CreateMap<UpdateWorkerDto, Worker>()
+                .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => SplitFirstName(src.Name)))
+                .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => SplitLastName(src.Name)));  
         }
 
         private string SplitFirstName(string name)

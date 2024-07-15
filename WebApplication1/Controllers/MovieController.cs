@@ -69,5 +69,47 @@ namespace WebApplication1.Controllers
 
             return CreatedAtAction(nameof(GetMovieById), new { id = movie.Id }, movie);
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteMovie(int id)
+        {
+            var movie = _movieRepository.GetMovieById(id);
+            if (movie == null)
+                return NotFound();
+
+            if (!_movieRepository.DeleteMovie(movie))
+            {
+                ModelState.AddModelError("", "Something went wrong while deleting the movie.");
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateMovie(int id, [FromBody] UpdateMovieDto movieDto)
+        {
+            
+            var existingMovie = _movieRepository.GetMovieById(id);
+            if (existingMovie == null)
+                return NotFound();
+
+            var director = _workerRepository.GetWorkerById(movieDto.DirectorId);
+            if (director == null || director.Role != Role.Director)
+            {
+                ModelState.AddModelError("DirectorId", "The specified DirectorId is invalid or the worker is not a director.");
+                return BadRequest(ModelState);
+            }
+
+            var movieToUpdate = _mapper.Map(movieDto, existingMovie);
+
+            if (!_movieRepository.Save())
+            {
+                ModelState.AddModelError("", "Something went wrong while updating the movie.");
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
+        }
     }
 }
