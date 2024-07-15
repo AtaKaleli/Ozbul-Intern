@@ -20,11 +20,13 @@ namespace WebApplication1.Repositories
         {
             return _context.Workers.OrderBy(w => w.Id).ToList();
         }
+
         public Worker GetWorkerById(int id)
         {
             return _context.Workers
                 .FirstOrDefault(w => w.Id == id); 
         }
+
         public bool CreateWorker(Worker worker)
         {
             _context.Add(worker);
@@ -36,16 +38,17 @@ namespace WebApplication1.Repositories
             _context.Remove(worker);
             return Save();
         }
+
         public bool UpdateWorker(Worker worker)  
         {
             _context.Update(worker);
             return Save();
         }
+
         public bool Save()
         {
             var saved = _context.SaveChanges();
             return saved > 0;
         }
-
     }
 }
