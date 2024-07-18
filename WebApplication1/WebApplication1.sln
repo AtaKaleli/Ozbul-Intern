@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "WebApplication1.csproj", "{3EE2F6FE-A1F7-4EEC-ACC5-A7F4920A1E2C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplication1", "WebApplication1.csproj", "{3EE2F6FE-A1F7-4EEC-ACC5-A7F4920A1E2C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieNUnitTests", "..\MovieNUnitTests\MovieNUnitTests.csproj", "{BE22C775-A350-49CD-AF98-F20334B4FFAD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{3EE2F6FE-A1F7-4EEC-ACC5-A7F4920A1E2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EE2F6FE-A1F7-4EEC-ACC5-A7F4920A1E2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EE2F6FE-A1F7-4EEC-ACC5-A7F4920A1E2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE22C775-A350-49CD-AF98-F20334B4FFAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE22C775-A350-49CD-AF98-F20334B4FFAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE22C775-A350-49CD-AF98-F20334B4FFAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE22C775-A350-49CD-AF98-F20334B4FFAD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
